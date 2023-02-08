@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilder/Videoarchiv der Allsky-Kamera der Angelaschule Osnabrück</title>
+</head>
+
+
+<body>
+  <div id="header">
+    <h1>Allsky-Archiv<h1>
+        <p>Hier zu finden sind die Videos der vergangenen Nächte. Außerdem werden hier die Wetterdiagramme der Sensoren,
+          die sich innerhalb der Kamera befinden, hier hochgeladen.</p>
+  </div>
+
+  <div id="file-list">
+    <h2>Videos</h2>
+  </div>
+
+</body>
+
+<!--
+  This javascript snippet is used to dynamically load the videos from the video directory.
+-->
+<script type="text/javascript">
+
+
+  fetch('/files')
+    .then(response => response.text())
+    .then(data => {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(data, "text/html");
+      var ul = doc.getElementsByTagName("ul")[0];
+      var links = ul.getElementsByTagName("a");
+      var prefix = "/files";
+      var currentUrl = window.location.origin;
+      for (var i = 0; i < links.length; i++) {
+        var video = document.createElement("video");
+        video.width = 320;
+        video.height = 240;
+        video.controls = true;
+        var source = document.createElement("source");
+        source.src = prefix + links[i].href.replace(currentUrl, '');
+        source.type = "video/mp4";
+        video.appendChild(source);
+        links[i].parentNode.appendChild(video);
+      }
+      document.getElementById("file-list").appendChild(ul);
+    });
+
+
+</script>
+<footer>
+</footer>

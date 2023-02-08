@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allsky-Kamera der Angelaschule Osnabrück</title>
+
+
+
+  <style>
+    body {
+      background: darkblue;
+    }
+
+    .js {
+      background: #fcc;
+    }
+    p {
+      color: grey;
+      border: thin solid;
+      margin: 20px;
+      padding: 1em;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+    function iframeLoaded() {
+      var iFrameID = document.getElementById('idIframe');
+      if (iFrameID) {
+
+        iFrameID.height = "";
+        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+      }
+    }
+  </script>
+
+</head>
+
+<META http-equiv="refresh" content="60"> <!--refreshen der Werte -->
+
+<body>
+
+  <style>
+    #stream {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 0.5em;
+      box-sizing: border-box;
+
+      background-color: ;
+      padding: 10px;
+    }
+
+
+    head {
+      grid-column: 1/6;
+      grid-row: 1/auto;
+    }
+  </style>
+
+  <div id="header">
+    <article>
+      <h1>Allsky-Website</h1>
+      <p>aktuelles Live-Bild der Kamera</p>
+    </article>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="archiv.html">Bilder/Videoarchiv</a></li>
+    </ul>
+  </nav>
+  <div id="stream">
+    <div>
+      <iframe src="https://player.twitch.tv/?0channel=allsky_angelaschule&parent=localhost&muted=true" id="idIframe"
+        onload="iframeLoaded()" style="border: none; width:100%; margin: 0 0 0 1%;" allowfullscreen scrolling="no">
+      </iframe>
+    </div>
+
+    <iframe src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=601ef8f1e443a0001bc5e45c" width="400" height="600"
+      marginwidth="8" marginheight="8" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+
+    <article>
+      <p>Temperatur der Kamera: <code id="temp"></code></p>
+      <p>Luftdruck in der Kamera: <code id="pressure"></code></p>
+      <p>Luftfeuchtigkeit in der Kamera: <code id="humidity"></code></p>
+
+    </article>
+
+    <script>
+      function fetchStatus() {
+        fetch('https://api.opensensemap.org/boxes/601ef8f1e443a0001bc5e45c')
+          .then((response) => response.json())
+          .then((data) => {
+            $("#temp").html(data.sensors[0].lastMeasurement.value + "°C");   //aktuelle Werte der Sensoren
+
+            $("#pressure").html(data.sensors[1].lastMeasurement.value + "hPa");
+
+            $("#humidity").html(data.sensors[2].lastMeasurement.value + "%")
+
+          });
+      };
+
+      window.addEventListener('load', function () {
+        var fetchInterval = 5000;
+
+        setInterval(fetchStatus, fetchInterval);
+      });
+
+
+
+    </script>
+  </div>
+
+
+
+</body>
+
+</html>
