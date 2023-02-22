@@ -49,7 +49,7 @@
       var ul = doc.getElementsByTagName("ul")[0];
       var links = ul.getElementsByTagName("a");
       var prefix = "/files";
-      var currentUrl = window.location.origin;
+      var currentUrl = window.location.href.replace(/archiv\.html$/, '');
       for (var i = 0; i < links.length; i++) {
         var video = document.createElement("video");
         video.width = 320;
