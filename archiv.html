@@ -40,30 +40,30 @@
 -->
 <script type="text/javascript">
 
+const currentURL = window.location.href.replace(/archiv\.html$/, '');
+const indexUrl = currentURL + 'files/index.txt';
 
-  fetch('/files')
-    .then(response => response.text())
-    .then(data => {
-      var parser = new DOMParser();
-      var doc = parser.parseFromString(data, "text/html");
-      var ul = doc.getElementsByTagName("ul")[0];
-      var links = ul.getElementsByTagName("a");
-      var prefix = "/files";
-      var currentUrl = window.location.href.replace(/archiv\.html$/, '');
-      for (var i = 0; i < links.length; i++) {
-        var video = document.createElement("video");
-        video.width = 320;
-        video.height = 240;
-        video.controls = true;
-        var source = document.createElement("source");
-        source.src = prefix + links[i].href.replace(currentUrl, '');
-        source.type = "video/mp4";
-        video.appendChild(source);
-        links[i].parentNode.appendChild(video);
-      }
-      document.getElementById("file-list").appendChild(ul);
+// Fetch the contents of the index file
+fetch(indexUrl)
+  .then(response => response.text())
+  .then(content => {
+    // Split the content into lines
+    const lines = content.trim().split('\n');
+
+    // Create an array of links
+    const links = lines.map(line => {
+      const filename = line.trim();
+      const fileUrl = currentURL+`files/${filename}`;
+      return `<li><a href="${fileUrl}">${filename}</a></li>`;
     });
 
+    // Create a HTML list and add the links to it
+    const list = `<ul>${links.join('')}</ul>`;
+    
+    // Append the list to the div with the id of "file-list"
+    document.getElementById('file-list').innerHTML = list;
+  })
+  .catch(error => console.error(error));
 
 </script>
 <footer>

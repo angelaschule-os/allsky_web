@@ -1,3 +1,2 @@
 allsky-20230123.mp4
 allsky-20230124.mp4
-index.txt
