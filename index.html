@@ -9,10 +9,11 @@
 
 
   <style>
-      @font-face {
-        font-family: Monocraft;
-        src: url("css/Monocraft.otf") format("opentype");
-      }
+    @font-face {
+      font-family: Monocraft;
+      src: url("css/Monocraft.otf") format("opentype");
+    }
+
     body {
       background: #000900;
       color: #4AEF98;
@@ -74,11 +75,6 @@
       <p>aktuelles Live-Bild der Kamera</p>
     </article>
   </div>
-  <nav>
-    <ul>
-      <li><a href="archiv.html">Bilder/Videoarchiv</a></li>
-    </ul>
-  </nav>
   <div id="stream">
     <div>
       <iframe src="https://player.twitch.tv/?channel=allsky_angelaschule&parent=angelaschule-os.github.io&muted=true"
@@ -91,6 +87,14 @@
       width="400" height="600" marginwidth="8" marginheight="8" hspace="0" vspace="0" frameborder="0"
       scrolling="no"></iframe>
 
+    <nav>
+      <ul>
+        <li><a href="archiv.html">Bilder/Videoarchiv</a></li>
+      </ul>
+    </nav>
+    <div id="git-hash"></div>
+
+
 
     <script>
       window.addEventListener('load', function () {
@@ -98,6 +102,17 @@
 
         setInterval(fetchStatus, fetchInterval);
       });
+
+
+      fetch("https://api.github.com/repos/angelaschule-os/allsky_web/commits/main")
+        .then(response => response.json())
+        .then(data => {
+          const shortHash = data.sha.substring(0, 7);
+          document.getElementById("git-hash").textContent = shortHash;
+        })
+        .catch(error => {
+          console.error(error);
+        });
     </script>
   </div>
 
