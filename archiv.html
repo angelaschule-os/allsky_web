@@ -40,30 +40,36 @@
 -->
 <script type="text/javascript">
 
-const currentURL = window.location.href.replace(/archiv\.html$/, '');
-const indexUrl = currentURL + 'files/index.txt';
+  const currentURL = window.location.href.replace(/archiv\.html$/, '');
+  const indexUrl = currentURL + 'files/index.txt';
 
-// Fetch the contents of the index file
-fetch(indexUrl)
-  .then(response => response.text())
-  .then(content => {
-    // Split the content into lines
-    const lines = content.trim().split('\n');
+  // Fetch the contents of the index file
+  fetch(indexUrl)
+    .then(response => response.text())
+    .then(content => {
+      // Split the content into lines
+      const lines = content.trim().split('\n');
 
-    // Create an array of links
-    const links = lines.map(line => {
-      const filename = line.trim();
-      const fileUrl = currentURL+`files/${filename}`;
-      return `<li><a href="${fileUrl}">${filename}</a></li>`;
-    });
+      // Create an array of links
+      const links = lines.map(line => {
+        const filename = line.trim();
+        const fileUrl = currentURL + `files/${filename}`;
 
-    // Create a HTML list and add the links to it
-    const list = `<ul>${links.join('')}</ul>`;
-    
-    // Append the list to the div with the id of "file-list"
-    document.getElementById('file-list').innerHTML = list;
-  })
-  .catch(error => console.error(error));
+        return `<li>
+                <div style="position: relative;">
+                  <video src="${fileUrl}" controls style="width: 320px; height: 240px; display: block;"></video>
+                  <a href="${fileUrl}" style="position: absolute; bottom: 0; left: 0; width: 320px; text-align: center; background-color: rgba(0, 0, 0, 0.5); color: #4AEF98 ; display: block; padding: 5px 0;">${filename}</a>
+                </div>
+              </li>`;
+      });
+
+      // Create a HTML list and add the links to it
+      const list = `<ul style="list-style: none;">${links.join('')}</ul>`;
+
+      // Append the list to the div with the id of "file-list"
+      document.getElementById('file-list').innerHTML = list;
+    })
+    .catch(error => console.error(error));
 
 </script>
 <footer>
