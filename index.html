@@ -15,10 +15,11 @@
     }
 
     body {
-      background: #000900;
-      color: #4AEF98;
+      color: #ffffffff;
       font-family: Monocraft;
 
+      background: url(komet.jpg) no-repeat;
+      background-size: auto;
     }
 
     .js {
@@ -26,7 +27,7 @@
     }
 
     p {
-      color: #4AEF98;
+      color: #ffffffff;
       border: thin solid;
       margin: 20px;
       padding: 1em;
@@ -67,14 +68,27 @@
       grid-column: 1/6;
       grid-row: 1/auto;
     }
+
+     banner {
+      max-width: 120%;
+      height: auto;
+    }
   </style>
+
 
   <div id="header">
     <article>
-      <h1>Angelaschule Allsky-Dashboard</h1>
-      <p>aktuelles Live-Bild der Kamera</p>
+      <img src="banner.jpg" class="banner" style="margin: 0px auto;" width="1600" height="250"
+        alt="Allsky-Angelaschule-Banner">
+      <p>Die Webseite zeigt euch einen Livestream der Allsky-Kamera auf dem Dach der Angelaschule Osnabrück. Im Archiv
+        findet ihr Videos der vergangenen Tage, an denen man den Himmel gut Beobachten konnte.
+        Der Stream ist außerdem auf <a href="https://www.twitch.tv/allsky_angelaschule">Twitch</a> vertreten. Dort könnt
+        ihr euch im Streamchat über eure Projekte unterhalten.</p>
+
+
     </article>
   </div>
+
   <div id="stream">
     <div>
       <iframe src="https://player.twitch.tv/?channel=allsky_angelaschule&parent=angelaschule-os.github.io&muted=true"
