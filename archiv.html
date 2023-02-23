@@ -14,9 +14,11 @@
   }
 
   body {
-    background: #000900;
-    color: #4AEF98;
+    color: #ffffffff;
     font-family: Monocraft;
+
+    background: url(orion.jpg) no-repeat;
+    background-size: auto;
 
   }
 </style>
@@ -25,8 +27,8 @@
 <body>
   <div id="header">
     <h1>Angelaschule: Allsky-Archiv<h1>
-        <p>Hier zu finden sind die Videos der vergangenen Nächte. Außerdem werden hier die Wetterdiagramme der Sensoren,
-          die sich innerhalb der Kamera befinden, hochgeladen.</p>
+        <p><small>Hier zu finden sind die Videos der vergangenen Nächte. Außerdem werden hier die Wetterdiagramme der Sensoren,
+          die sich innerhalb der Kamera befinden, hochgeladen.</small></p>
   </div>
 
   <div id="file-list">
@@ -58,7 +60,7 @@
         return `<li>
                 <div style="position: relative;">
                   <video src="${fileUrl}" controls style="width: 320px; height: 240px; display: block;"></video>
-                  <a href="${fileUrl}" style="position: absolute; bottom: 0; left: 0; width: 320px; text-align: center; background-color: rgba(0, 0, 0, 0.5); color: #4AEF98 ; display: block; padding: 5px 0;">${filename}</a>
+                  <a href="${fileUrl}" style="position: absolute; bottom: 0; left: 0; width: 320px; text-align: center; background-color: rgba(0, 0, 0, 0.5); color: #ffffffff ; display: block; padding: 5px 0;">${filename}</a>
                 </div>
               </li>`;
       });
