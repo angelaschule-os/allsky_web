@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Allsky-Dashboard der Angelaschule Osnabrück</title>
 
-
-
   <style>
     @font-face {
       font-family: Monocraft;
@@ -32,27 +30,7 @@
       margin: 20px;
       padding: 1em;
     }
-  </style>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript">
-    function iframeLoaded() {
-      var iFrameID = document.getElementById('idIframe');
-      if (iFrameID) {
-
-        iFrameID.height = "";
-        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
-      }
-    }
-  </script>
-
-</head>
-
-<META http-equiv="refresh" content="60"> <!--refreshen der Werte -->
-
-<body>
-
-  <style>
     #stream {
       display: grid;
       grid-template-columns: 3fr 1fr;
@@ -69,12 +47,27 @@
       grid-row: 1/auto;
     }
 
-     banner {
+    banner {
       max-width: 120%;
       height: auto;
     }
   </style>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+    function iframeLoaded() {
+      var iFrameID = document.getElementById('idIframe');
+      if (iFrameID) {
+
+        iFrameID.height = "";
+        iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+      }
+    }
+  </script>
+
+</head>
+
+<body>
 
   <div id="header">
     <article>
@@ -100,31 +93,27 @@
     <iframe src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=601ef8f1e443a0001bc5e45c"
       width="400" height="600" marginwidth="8" marginheight="8" hspace="0" vspace="0" frameborder="0"
       scrolling="no"></iframe>
-
-    <nav>
-      <ul>
-        <li><a href="archiv.html">Bilder/Videoarchiv</a></li>
-      </ul>
-    </nav>
-    <div id="git-hash"></div>
-
-
-
-    <script>
-
-      fetch("https://api.github.com/repos/angelaschule-os/allsky_web/commits/main")
-        .then(response => response.json())
-        .then(data => {
-          const shortHash = data.sha.substring(0, 7);
-          document.getElementById("git-hash").textContent = shortHash;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    </script>
   </div>
 
+  <div>
+    <ul>
+      <li><a href="archiv.html">Bilder/Videoarchiv</a></li>
+    </ul>
+  </div>
+  <div id="git-hash"></div>
 
+
+  <script>
+    fetch("https://api.github.com/repos/angelaschule-os/allsky_web/commits/main")
+      .then(response => response.json())
+      .then(data => {
+        const shortHash = data.sha.substring(0, 7);
+        document.getElementById("git-hash").textContent = shortHash;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
 
 </body>
 
