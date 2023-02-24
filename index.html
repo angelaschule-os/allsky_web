@@ -111,12 +111,6 @@
 
 
     <script>
-      window.addEventListener('load', function () {
-        var fetchInterval = 5000;
-
-        setInterval(fetchStatus, fetchInterval);
-      });
-
 
       fetch("https://api.github.com/repos/angelaschule-os/allsky_web/commits/main")
         .then(response => response.json())
